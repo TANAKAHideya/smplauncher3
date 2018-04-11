@@ -35,10 +35,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.setClassName("com.example.hide.sample3",
                 "com.example.hide.sample3.MainActivity");
         PackageManager pm = getPackageManager();
+        int displayid=ActivityOptions.makeBasic().getLaunchDisplayId();
         if (false == pm.hasSystemFeature(FEATURE_ACTIVITIES_ON_SECONDARY_DISPLAYS)){
-            startActivity(intent, ActivityOptions.makeBasic().setLaunchDisplayId(ActivityOptions.makeBasic().getLaunchDisplayId()).toBundle()); /* */
+            startActivity(intent, ActivityOptions.makeBasic().setLaunchDisplayId(displayid).toBundle()); /* */
         } else {
-            startActivity(intent, ActivityOptions.makeBasic().setLaunchDisplayId(ActivityOptions.makeBasic().getLaunchDisplayId()+1).toBundle()); /* */
+            /* startActivity(intent, ActivityOptions.makeBasic().setLaunchDisplayId(displayid+1).toBundle()); /* */
+            startActivity(intent, ActivityOptions.makeBasic().setLaunchDisplayId(displayid+2).toBundle()); /* */
         }
     }
 }
