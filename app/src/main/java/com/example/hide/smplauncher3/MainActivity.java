@@ -14,6 +14,7 @@ import android.view.View;
 import static android.content.pm.PackageManager.FEATURE_ACTIVITIES_ON_SECONDARY_DISPLAYS;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "smplv3";
     View changeButton,clearButton,checkBox;
 
     @Override
@@ -35,12 +36,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.setClassName("com.example.hide.sample3",
                 "com.example.hide.sample3.MainActivity");
         PackageManager pm = getPackageManager();
-        int displayid=ActivityOptions.makeBasic().getLaunchDisplayId();
+        int displayid=9999;
+
+        displayid=ActivityOptions.makeBasic().getLaunchDisplayId();
         if (false == pm.hasSystemFeature(FEATURE_ACTIVITIES_ON_SECONDARY_DISPLAYS)){
-            startActivity(intent, ActivityOptions.makeBasic().setLaunchDisplayId(displayid).toBundle()); /* */
+            startActivity(intent, ActivityOptions.makeBasic().setLaunchDisplayId(-1).toBundle());
+            displayid=ActivityOptions.makeBasic().getLaunchDisplayId();
         } else {
-            /* startActivity(intent, ActivityOptions.makeBasic().setLaunchDisplayId(displayid+1).toBundle()); /* */
-            startActivity(intent, ActivityOptions.makeBasic().setLaunchDisplayId(displayid+2).toBundle()); /* */
+            /* startActivity(intent, ActivityOptions.makeBasic().setLaunchDisplayId(-1).toBundle()); /* */
+            /* startActivity(intent, ActivityOptions.makeBasic().setLaunchDisplayId(0).toBundle()); /* */
+            startActivity(intent, ActivityOptions.makeBasic().setLaunchDisplayId(1).toBundle()); /* */
+            /* startActivity(intent, ActivityOptions.makeBasic().setLaunchDisplayId(2).toBundle()); /* */
+            displayid=ActivityOptions.makeBasic().getLaunchDisplayId();
         }
+        Log.i(TAG, "displayid =" + displayid);
     }
 }
